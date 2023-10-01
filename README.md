@@ -1,5 +1,7 @@
 # Terraform Beginner Bootcamp 2023
 
+## Environment configuration
+
 ENV for AWS cli can be set by running this:
 
 ```bash

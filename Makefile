@@ -7,12 +7,12 @@ help:
 		}' $(MAKEFILE_LIST) | \
 		column -s ":" -t
 
-list-files:
-	@ls -alh
-
 terraform-apply-changes:
 	terraform plan \
     && terraform apply --auto-approve
 
 terraform-remove-changes:
 	terraform destroy --auto-approve
+
+list-s3-buckets:
+	aws s3api list-buckets

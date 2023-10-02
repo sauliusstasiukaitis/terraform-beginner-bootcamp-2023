@@ -1,4 +1,12 @@
 terraform {
+    cloud {
+        organization = "sauliusstasiukaitis"
+
+        workspaces {
+            name = "terra-house-1"
+        }
+    }
+
     required_providers {
         random = {
             source = "hashicorp/random"
@@ -17,7 +25,7 @@ provider "random" {
 }
 
 provider "aws" {
-    # Configuration options
+    # Configuration optionsaws s3api list-buckets
 }
 
 resource "random_string" "bucket_name" {

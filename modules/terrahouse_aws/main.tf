@@ -30,6 +30,6 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 resource "aws_s3_object" "website_index" {
     bucket = aws_s3_bucket.website_bucket.bucket
     key = "index.html"
-    source = "${path.root}/public/"
+    source = "${path.root}/public/index.html"
     etag = filemd5("public/index.html")
 }

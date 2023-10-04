@@ -22,6 +22,8 @@ resource "aws_s3_object" "website_index" {
     bucket = aws_s3_bucket.website_bucket.bucket
     key = "index.html"
     source = "${path.root}${var.index_html_file_path}"
+    content_type = "text/html"
+
     etag = filemd5("${path.root}${var.index_html_file_path}")
 }
 
@@ -29,6 +31,8 @@ resource "aws_s3_object" "website_error" {
     bucket = aws_s3_bucket.website_bucket.bucket
     key = "error.html"
     source = "${path.root}${var.error_html_file_path}"
+    content_type = "text/html"
+
     etag = filemd5("${path.root}${var.error_html_file_path}")
 }
 

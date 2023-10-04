@@ -12,3 +12,21 @@ variable "bucket_name" {
     type = string
     description = "AWS S3 bucket name"
 }
+
+variable "index_html_file_path" {
+    type = string
+
+    validation {
+        condition = fileexists(var.index_html_file_path)
+        error_message = "The provided path to index file does not exist"
+    }
+}
+
+variable "error_html_file_path" {
+    type = string
+
+    validation {
+        condition = fileexists(var.error_html_file_path)
+        error_message = "The provided path to error file does not exist"
+    }
+}

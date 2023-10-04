@@ -7,3 +7,8 @@ variable "user_uuid" {
     error_message = "user_uuid must be a valid UUID."
   }
 }
+
+variable "bucket_name" {
+    type = string
+    description = "AWS S3 bucket name"
+}

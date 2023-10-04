@@ -25,6 +25,10 @@ resource "aws_s3_object" "website_index" {
     content_type = "text/html"
 
     etag = filemd5("${path.root}${var.index_html_file_path}")
+    lifecycle {
+        replace_triggered_by = [terraform_data.content_version.output]
+        ignore_changes = [etag]
+    }
 }
 
 resource "aws_s3_object" "website_error" {
@@ -34,6 +38,9 @@ resource "aws_s3_object" "website_error" {
     content_type = "text/html"
 
     etag = filemd5("${path.root}${var.error_html_file_path}")
+    lifecycle {
+        ignore_changes = [etag]
+    }
 }
 
 
@@ -57,4 +64,8 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
             }
         }
     })
+}
+
+resource "terraform_data" "content_version" {
+    input = var.content_version
 }

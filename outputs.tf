@@ -1,4 +1,7 @@
-output "website_bucket_name" {
-    description = "Bucket name for our static website hosting"
-    value = module.terrahouse_aws.website_bucket_name
+output "website_bucket" {
+    value = module.terrahouse_aws.website_bucket
+}
+
+output "s3_website_endpoint" {
+    value = module.terrahouse_aws.website_endpoint
 }

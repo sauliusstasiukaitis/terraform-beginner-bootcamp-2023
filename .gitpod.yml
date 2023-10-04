@@ -2,7 +2,7 @@ tasks:
   - name: terraform
     before: |
       cd $PROJECT_ROOT
-      cp $PROJECT_ROOT/terraform.auto.tfvars.example $PROJECT_ROOT/terraform.auto.tfvars
+      cp $PROJECT_ROOT/terraform.tfvars.example $PROJECT_ROOT/terraform.tfvars
       source ./bin/install_terraform_cli
       source ./bin/generate_tfrc_credentials
       source ./bin/set_tf_alias

@@ -15,10 +15,6 @@ terraform {
     }
 }
 
-provider "random" {
-    # Configuration options
-}
-
 provider "aws" {
     # Configuration optionsaws s3api list-buckets
 }

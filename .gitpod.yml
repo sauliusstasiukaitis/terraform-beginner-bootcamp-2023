@@ -12,6 +12,11 @@ tasks:
     before: |
       cd $PROJECT_ROOT
       source ./bin/install_aws_cli
+  - name: http-server
+    before: |
+      npm install --global http-server
+    command: 
+      http-server
 
 vscode:
   extensions:

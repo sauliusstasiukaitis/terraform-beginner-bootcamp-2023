@@ -16,3 +16,12 @@ terraform-remove-changes:
 
 list-s3-buckets:
 	aws s3api list-buckets
+
+install_and_run_terratowns_mock_server:
+	cd "${PROJECT_ROOT}/terratowns_mock_server"  && \
+	bundle install  && \
+	bundle exec ruby server.rb
+
+run_terratowns_mock_server:	
+	cd "${PROJECT_ROOT}/terratowns_mock_server" && \
+	bundle exec ruby server.rb

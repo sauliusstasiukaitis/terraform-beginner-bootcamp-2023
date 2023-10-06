@@ -11,7 +11,6 @@ token="9b49b3fb-b8e9-483c-b703-97ba88eef8e0"
 house_uuid="$1"
 name="New House [Updated]"
 description="A new house description. Its better than last time!"
-content_version=2
 
 # Enable printing of commands
 #set -x
@@ -22,7 +21,7 @@ RESPONSE=$(curl -X PUT \
 -H "Authorization: Bearer $token" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--d "{\"name\": \"$name\", \"description\": \"$description\", \"content_version\": $content_version}" \
+-d "{\"name\": \"$name\", \"description\": \"$description\"}" \
 http://localhost:4567/api/u/$user_uuid/homes/$house_uuid)
 
 # Disable printing of commands

@@ -3,13 +3,20 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+# Mock heaving a state or database for development server in this global variable
 $home = {}
 
 class Home
   include ActiveModel::Validations
   attr_accessor :town, :name, :description, :domain_name, :content_version
 
-  validates :town, presence: true
+  validates :town, presence: true, inclusion: { in: [
+      'melomaniac-mansion',
+      'cooker-code',
+      'video-valley',
+      'the-nomad-pad',
+      'gamers-grotto',
+  ] }
   validates :name, presence: true
   validates :description, presence: true
   validates :domain_name, 
@@ -148,25 +155,17 @@ class TerraTownsMockServer < Sinatra::Base
     # Validate payload data
     name = payload["name"]
     description = payload["description"]
-    domain_name = payload["domain_name"]
-    content_version = payload["content_version"]
 
     unless params[:uuid] == $home[:uuid]
       error 404, "failed to find home with provided uuid and bearer token"
     end
 
-    home = Home.new
-    home.town = $home[:town]
-    home.name = name
-    home.description = description
-    home.domain_name = domain_name
-    home.content_version = content_version
+    # Update global $home variable
+    $home[:name] = name
+    $home[:description] = description
+    $home[:content_version] = (payload["content_version"] || ($home[:content_version] + 1))
 
-    unless home.valid?
-      error 422, home.errors.messages.to_json
-    end
-
-    return { uuid: params[:uuid] }.to_json
+    return $home.to_json
   end
 
   # DELETE
@@ -181,7 +180,7 @@ class TerraTownsMockServer < Sinatra::Base
     end
 
     $home = {}
-    { message: "House deleted successfully" }.to_json
+    return { uuid: params[:uuid] }.to_json
   end
 end
 

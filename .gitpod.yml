@@ -1,13 +1,14 @@
 tasks:
   - name: terraform
+    env:
+      TF_LOG: DEBUG
     before: |
       cd $PROJECT_ROOT
-      cp $PROJECT_ROOT/terraform.tfvars.example $PROJECT_ROOT/terraform.tfvars
+      source ./bin/set_tf_alias
       source ./bin/install_terraform_cli
       source ./bin/generate_tfrc_credentials
-      source ./bin/set_tf_alias
   - name: sinatra
-    init: |
+    before: | 
       cd $PROJECT_ROOT
       cd terratowns_mock_server
       bundle install
@@ -17,9 +18,11 @@ tasks:
       AWS_CLI_AUTO_PROMPT: on-partial
     before: |
       cd $PROJECT_ROOT
+      source ./bin/set_tf_alias
       source ./bin/install_aws_cli
   - name: http-server
     before: |
+      cd $PROJECT_ROOT
       npm install --global http-server
     command: 
       http-server
@@ -28,3 +31,7 @@ vscode:
   extensions:
     - amazonwebservices.aws-toolkit-vscode
     - hashicorp.terraform
+    - phil294.git-log--graph
+    - mhutchie.git-graph
+    - phil294.git-log--graph
+    - ms-vscode.makefile-tools

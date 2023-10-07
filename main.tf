@@ -1,11 +1,11 @@
 terraform {
-    # cloud {
-    #     organization = "sauliusstasiukaitis"
+    cloud {
+        organization = "sauliusstasiukaitis"
 
-    #     workspaces {
-    #         name = "terra-house-1"
-    #     }
-    # }
+        workspaces {
+            name = "terra-house-1"
+        }
+    }
 
     required_providers {
         terratowns = {
@@ -21,20 +21,38 @@ provider "terratowns" {
     token = var.terratowns_access_token # "38f457f1-0d2a-42b4-b412-3e56b4e77af8"
 }
 
-resource "terratowns_home" "home" {
-    name = "How to gamble"
-    description = "Just a playground for Terraform"
-    domain_name = module.terrahouse_aws.cloudfront_url
-    # domain_name = "d22fvnxw4kno2n.cloudfront.net"
-    town = "missingo"
-    content_version = 1
-}
-
-module "terrahouse_aws" {
+module "terratowns_gambling" {
     source = "./modules/terrahouse_aws"
     user_uuid = var.teacherseat_user_uuid
-    index_html_file_path = var.index_html_file_path
-    error_html_file_path = var.error_html_file_path
-    content_version = var.content_version
-    assets_path = var.assets_path
+    index_html_file_path = var.gambling_home_config.index_html_file_path
+    error_html_file_path = var.gambling_home_config.error_html_file_path
+    content_version = var.gambling_home_config.content_version
+    assets_path = var.gambling_home_config.assets_path
+}
+
+resource "terratowns_home" "gambling_home" {
+    name = "How to gamble"
+    description = "Just a playground for Terraform"
+    domain_name = module.terratowns_gambling.cloudfront_url
+    # domain_name = "d22fvnxw4kno2n.cloudfront.net"
+    town = "missingo"
+    content_version = var.gambling_home_config.content_version
+}
+
+module "terratowns_wooden_house" {
+    source = "./modules/terrahouse_aws"
+    user_uuid = var.teacherseat_user_uuid
+    index_html_file_path = var.wooden_home_config.index_html_file_path
+    error_html_file_path = var.wooden_home_config.error_html_file_path
+    content_version = var.wooden_home_config.content_version
+    assets_path = var.wooden_home_config.assets_path
+}
+
+resource "terratowns_home" "wooden_home" {
+    name = "Build a shack"
+    description = "Is it a home or a house, no matter as long as it's wooden"
+    domain_name = module.terratowns_wooden_house.cloudfront_url
+    # domain_name = "d22fvnxw4kno2n.cloudfront.net"
+    town = "missingo"
+    content_version = var.wooden_home_config.content_version
 }

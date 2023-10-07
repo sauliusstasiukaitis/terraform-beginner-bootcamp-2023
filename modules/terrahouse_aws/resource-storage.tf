@@ -22,10 +22,10 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 resource "aws_s3_object" "website_index" {
     bucket = aws_s3_bucket.website_bucket.bucket
     key = "index.html"
-    source = "${path.root}${var.index_html_file_path}"
+    source = "${path.root}/public/${var.index_html_file_path}"
     content_type = "text/html"
 
-    etag = filemd5("${path.root}${var.index_html_file_path}")
+    etag = filemd5("${path.root}/public/${var.index_html_file_path}")
     lifecycle {
         replace_triggered_by = [terraform_data.content_version.output]
         ignore_changes = [etag]
@@ -35,11 +35,11 @@ resource "aws_s3_object" "website_index" {
 resource "aws_s3_object" "upload_assets" {
     bucket = aws_s3_bucket.website_bucket.bucket
 
-    for_each = fileset("${path.root}/${var.assets_path}", "*.{jpg,png.gif}")
+    for_each = fileset("${path.root}/public/${var.assets_path}", "*.{jpg,png.gif}")
     key = "assets/${each.key}"
-    source = "${path.root}/${var.assets_path}/${each.key}"
+    source = "${path.root}/public/${var.assets_path}/${each.key}"
 
-    etag = filemd5("${path.root}/${var.assets_path}/${each.key}")
+    etag = filemd5("${path.root}/public/${var.assets_path}/${each.key}")
     lifecycle {
         replace_triggered_by = [terraform_data.content_version.output]
         ignore_changes = [etag]
@@ -50,10 +50,10 @@ resource "aws_s3_object" "upload_assets" {
 resource "aws_s3_object" "website_error" {
     bucket = aws_s3_bucket.website_bucket.bucket
     key = "error.html"
-    source = "${path.root}${var.error_html_file_path}"
+    source = "${path.root}/public/${var.error_html_file_path}"
     content_type = "text/html"
 
-    etag = filemd5("${path.root}${var.error_html_file_path}")
+    etag = filemd5("${path.root}/public/${var.error_html_file_path}")
     lifecycle {
         ignore_changes = [etag]
     }

@@ -1,13 +1,32 @@
-variable "index_html_file_path" {
-    type = string
+variable "gambling_home_config" {
+  type = object({
+    index_html_file_path = string
+    error_html_file_path = string
+    assets_path = string
+    content_version = number
+  })
+#   default = {
+#     index_html_file_path = "gambling/index.html"
+#     error_html_file_path = "gambling/error.html"
+#     assets_path = "gambling/assets"
+#     content_version = 1
+#   }
 }
 
-variable "error_html_file_path" {
-    type = string
-}
-
-variable "assets_path" {
-    type = string
+variable "wooden_home_config" {
+  type = object({
+    index_html_file_path = string
+    error_html_file_path = string
+    assets_path = string
+    content_version = number
+  })
+  description = "A nested configuration variable"
+  default = {
+    index_html_file_path = "wooden_hause/index.html"
+    error_html_file_path = "wooden_hause/error.html"
+    assets_path = "wooden_hause/assets"
+    content_version = 4
+  }
 }
 
 variable "AWS_ACCESS_KEY_ID" {
@@ -20,10 +39,6 @@ variable "AWS_DEFAULT_REGION" {
 
 variable "AWS_SECRET_ACCESS_KEY" {
     type = string
-}
-
-variable "content_version" {
-    type = number
 }
 
 variable "terratowns_endpoint" {

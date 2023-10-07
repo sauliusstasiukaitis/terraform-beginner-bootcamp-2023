@@ -16,6 +16,7 @@ class Home
       'video-valley',
       'the-nomad-pad',
       'gamers-grotto',
+      'missingo',
   ] }
   validates :name, presence: true
   validates :description, presence: true

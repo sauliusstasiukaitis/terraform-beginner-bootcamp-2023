@@ -1,13 +1,3 @@
-variable "user_uuid" {
-    type        = string
-    description = "The UUID of the user"
-}
-
-variable "bucket_name" {
-    type = string
-    description = "AWS S3 bucket name"
-}
-
 variable "index_html_file_path" {
     type = string
 }
@@ -33,5 +23,17 @@ variable "AWS_SECRET_ACCESS_KEY" {
 }
 
 variable "content_version" {
-    type        = number
+    type = number
+}
+
+variable "terratowns_endpoint" {
+    type = string
+}
+
+variable "terratowns_access_token" {
+    type = string
+}
+
+variable "teacherseat_user_uuid" {
+    type = string
 }

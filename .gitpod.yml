@@ -35,3 +35,4 @@ vscode:
     - mhutchie.git-graph
     - phil294.git-log--graph
     - ms-vscode.makefile-tools
+    - golang.go

@@ -49,10 +49,10 @@ module "terratowns_wooden_house" {
 }
 
 resource "terratowns_home" "wooden_home" {
-    name = "Build a shack"
-    description = "Is it a home or a house, no matter as long as it's wooden"
+    name = "Lithuania outdoor travel guide"
+    description = "Explore the breathtaking landscapes and outdoor adventures of Lithuania with our travel guide. From hiking in lush forests to kayaking on tranquil lakes, discover the natural beauty and rich culture of this Baltic gem."
     domain_name = module.terratowns_wooden_house.cloudfront_url
     # domain_name = "d22fvnxw4kno2n.cloudfront.net"
-    town = "missingo"
+    town = "the-nomad-pad"
     content_version = var.wooden_home_config.content_version
 }

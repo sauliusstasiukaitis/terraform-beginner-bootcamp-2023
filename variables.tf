@@ -25,7 +25,7 @@ variable "wooden_home_config" {
     index_html_file_path = "wooden_hause/index.html"
     error_html_file_path = "wooden_hause/error.html"
     assets_path = "wooden_hause/assets"
-    content_version = 4
+    content_version = 5
   }
 }
 
